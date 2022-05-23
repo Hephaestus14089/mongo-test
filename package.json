@@ -1,0 +1,10 @@
+{
+  "name": "mongo-test",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "Bhargav Das Gupta",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
