@@ -5,6 +5,7 @@
   "author": "Bhargav Das Gupta",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mongodb": "^4.6.0"
   }
 }
