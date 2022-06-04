@@ -29,5 +29,21 @@ connectToDB((err) => {
 
 // routes
 app.get('/books', (req, res) => {
-  res.json({ mssg: "Welcome to the API" });
+
+  let books = [];
+
+  db.collection('books')
+    .find() // returns 'cursor', i.e. a pointer that points to the collection
+    .sort({ author: 1 })
+    .forEach(book => {
+      books.push(book);
+    })
+    .then(() => {
+      res.status(200).json(books);
+    })
+    .catch(() => {
+      res.status(500).json({error: "Could not fetch documents"});
+    });
+
+  // res.json({ mssg: "Welcome to the API" });
 });
