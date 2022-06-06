@@ -32,11 +32,18 @@ connectToDB((err) => {
 // routes
 app.get('/books', (req, res) => {
 
+  // current page
+  const page = req.query.pg_n || 0; // default page number is 0
+
+  const booksPerPage = 3;
+
   let books = [];
 
   db.collection('books')
     .find() // returns 'cursor', i.e. a pointer that points to the collection
     .sort({ author: 1 })
+    .skip(page * booksPerPage)
+    .limit(booksPerPage)
     .forEach(book => {
       books.push(book);
     })
