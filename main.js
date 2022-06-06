@@ -4,10 +4,11 @@ const { connectToDB, getDB } = require('./db');
 
 // init app and middleware
 const app = express();
-
-let db;
+app.use(express.json());
 
 // db connection
+let db;
+
 connectToDB((err) => {
   /*
     the call back function
@@ -63,4 +64,18 @@ app.get('/books/:id', (req, res) => {
   }
   else
     res.status(500).json({error: "Invalid document id"});
+});
+
+app.post('/books', (req, res) => {
+
+  const book = req.body;
+
+  db.collection('books')
+    .insertOne(book)
+    .then(result => {
+      res.status(201).json(result);
+    })
+    .catch(err => {
+      res.status(500).json({error: "Could not create document"});
+    });
 });
